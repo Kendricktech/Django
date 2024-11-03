@@ -1,0 +1,54 @@
+{% load static %}
+{% load static tailwind_tags %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{% block title %}Your Page Title{% endblock title %}</title>
+
+    <!-- Favicon -->
+    <link rel="shortcut icon" href="{% static 'images/favicon.ico' %}" type="image/x-icon">
+
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@100..900&display=swap" rel="stylesheet">
+
+    <!-- Tailwind CSS -->
+    {% tailwind_css %}
+    <link rel="stylesheet" href="{% static 'css/main.css' %}">
+</head>
+<body>
+
+<!-- Header -->
+<header class="flex items-center justify-between w-full fixed top-0 z-10 bg-gray-800 p-4 text-red-50">
+    <!-- Logo -->
+    <img src="{% static 'images/logo.svg' %}" alt="Happy Home Logo" class="h-10">
+
+    <!-- Navigation Links -->
+    <nav class="flex space-x-4">
+        <a href="" class="hover:text-gray-300">Properties</a>
+        <a href="" class="hover:text-gray-300">Services</a>
+        {% if not user.is_agent %}
+            <a href="" class="hover:text-gray-300">Agents</a>
+        {% endif %}
+    </nav>
+
+    <!-- Authenticated User Links -->
+    <div class="flex space-x-4">
+        {% if user.is_authenticated %}
+            <a href="" class="hover:text-gray-300">Inbox</a>
+            <a href="" class="hover:text-gray-300">Dashboard</a>
+            <a href="" class="hover:text-gray-300">Profile</a>
+            {% if user.is_agent %}
+                <a href="" class="hover:text-gray-300">My Listings</a>
+            {% endif %}
+            <a href="" class="hover:text-gray-300">Sign Out</a>
+        {% else %}
+            <a href="" class="hover:text-gray-300">Login</a>
+            <a href="" class="hover:text-gray-300">Register</a>
+        {% endif %}
+    </div>
+</header>
+
+</body>
+</html>
